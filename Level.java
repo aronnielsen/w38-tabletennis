@@ -1,12 +1,8 @@
 import greenfoot.*;
 
 public class Level extends Actor
-{
-    private String text;
-    
-    public Level(String text) {
-        this.text = text;
-        
+{    
+    public Level(String text) {        
         GreenfootImage newImage = new GreenfootImage(125, 50);
         newImage.setColor(new Color(0, 0, 0));
         newImage.setFont(new Font(true, false, 12));
@@ -15,9 +11,7 @@ public class Level extends Actor
         setImage(newImage);
     }
     
-    public void updateText(String text) {
-        this.text = text;
-        
+    public void updateText(String text) {        
         GreenfootImage newImage = new GreenfootImage(125, 50);
         newImage.setColor(new Color(0, 0, 0));
         newImage.setFont(new Font(true, false, 12));

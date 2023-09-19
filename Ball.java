@@ -1,12 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.Random;
+import greenfoot.*;
 
-/**
- * Write a description of class Ball here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Ball extends Actor
 {    
     private final boolean SIMPLE_MODE = false;
@@ -22,45 +15,34 @@ public class Ball extends Actor
     
     public Ball() {
         GreenfootImage newImage = new GreenfootImage(25, 25);
-        
         newImage.setColor(new Color(0, 0, 0));
         newImage.fillOval(0,0,25,25);
         
         setImage(newImage);
     }
     
-    private void 
-    
     public void act()
     {
-        if (reset) {
-            if (Greenfoot.isKeyDown("space")) {
-                restartBall();
-            }
-        } else {
+        if (!reset) {
             move(moveSpeed + level);
         
             if (isAtEdge()) {
-                if (SIMPLE_MODE) {
-                    if (getY() > getWorld().getHeight() - size) {
-                        reflectVertical();
-                    } else if (getY() < size) {
-                        reflectVertical();
-                    }
-                } else {
-                    if (getY() > getWorld().getHeight() - size) {
-                        scoredPoint(false);
-                    } else if (getY() < size) {
-                        scoredPoint(true);
-                    }
+                if (SIMPLE_MODE && (getY() > getWorld().getHeight() - size || getY() < size)) {
+                    reflectVertical();
+                } if (getY() > getWorld().getHeight() - size) {
+                    scoredPoint(false);
+                } else if (getY() < size) {
+                    scoredPoint(true);
+                }
+                
+                if (getX() > getWorld().getWidth() - 25 || getX() < 25) {
+                    reflectHorizontal();
                 }
             }
             
-            if (isAtEdge() && (getX() > getWorld().getWidth() - 25 || getX() < 25)) {
-                reflectHorizontal();
-            }
-            
             checkPaddleCollision();
+        } else if (Greenfoot.isKeyDown("space")) {
+            restartBall();
         }
     }
     
@@ -75,14 +57,17 @@ public class Ball extends Actor
             getWorldOfType(MyWorld.class).giveComputerPoint();
         }
         
+        resetBall();
+    }
+    
+    private void resetBall() {
         setLocation(getWorld().getWidth()/2 - size/2, getWorld().getHeight()/2);
         reset = true;
     }
     
-    public void restartBall() {
+    private void restartBall() {
+        setRotation(Greenfoot.getRandomNumber(90) + 45);
         reset = false;
-        Random random = new Random();
-        setRotation(random.nextInt(90) + 45);
     }
         
     private void checkPaddleCollision() {
@@ -100,9 +85,7 @@ public class Ball extends Actor
                 level = world.getLevel();
             }
             
-            if (paddle.getPlayer() && getY() < paddle.getY()) {
-                reflectVertical(paddle.getX() - getX());
-            } else if (!paddle.getPlayer() && getY() > paddle.getY()) {
+            if (paddle.getPlayer() && getY() < paddle.getY() || !paddle.getPlayer() && getY() > paddle.getY()) {
                 reflectVertical(paddle.getX() - getX());
             }
             
