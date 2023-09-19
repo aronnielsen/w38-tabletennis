@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Paddle
+comment0.text=\n\ Write\ a\ description\ of\ class\ Paddle\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ Paddle\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment2.params=
+comment2.target=void\ advancedComputerInput()
+comment3.params=
+comment3.target=void\ simpleComputerInput()
+comment4.params=
+comment4.target=boolean\ getPlayer()
+comment5.params=moveSpeed\ playerPaddle
+comment5.target=Paddle(int,\ boolean)
+comment6.params=value
+comment6.target=int\ abs(int)
+comment7.params=
+comment7.target=void\ playerInput()
+comment8.params=
+comment8.target=void\ playerCollision()
+numComments=9
